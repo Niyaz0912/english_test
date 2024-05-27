@@ -21,5 +21,19 @@ def get_user_level(level, question_liist):
     return words
 
 
-def base_program(words):
-    """"""
+def base_program(questions):
+    """функция принимает словарь с вопросами, задает их, получает ответы
+    в зависимости от ответов заполняет словарь, который и возвращает"""
+    answers = {}
+
+    for word, translate in questions.items():
+        answer = input(f"\n{word}, {len(translate)} букв, начинается на {translate[0].upper()}...\n").lower()
+
+        if answer == translate:
+            print(f"Верно! {word.title()} это {translate.title()}.")
+            answers[word] = True
+        else:
+            print(f"Неверно! {word.title()} это {translate.title()}.")
+            answers[word] = False
+
+    return answers
