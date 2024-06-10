@@ -37,3 +37,29 @@ def base_program(questions):
             answers[word] = False
 
     return answers
+
+def get_result(answers, knowledge_level):
+    """Функция принимает словарь с ответами пользователя
+    и словарь со шкалой оценки знаний, сообщает что верно, а что нет.
+    Возвращает уровень знаний пользователя"""
+
+    counter = 0
+    print("\nПравильно отвечены слова:")
+    for key, value in answers.items():
+        if value is True:
+            print(key)
+            counter += 1
+    print("\nНеправильно отвечены слова:")
+    for key, value in answers.items():
+        if value is False:
+            print(key)
+    return knowledge_level[str(counter)]
+
+def write_answers(filename, answers):
+    """Функция принимает имя файла и словарь с ответами пользователя,
+    записывает эти ответы в файл формата .json, возвращает
+    соответствующее сообщение"""
+    answers_json = json.dumps(answers, ensure_ascii=False, indent=4)
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(answers_json)
+        return "Ответы записаны"
